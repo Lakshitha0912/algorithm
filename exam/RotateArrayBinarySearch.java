@@ -12,26 +12,29 @@
 public class RotateArrayBinarySearch {
 
 	public static int search(int a[], int n, int t) {
-		int low = 0, high = n - 1;
-		while(low<=high) {
-			int mid = low + (high-low)/2;
+		int low=0,high = n-1;
+		int mid;
+		while(low<=high){
+			mid = low + (high-low)/2;
 			if(a[mid] == t){
 				return mid;
 			}
-			if(a[low]<=a[mid]) {
-				if(t<a[mid] && t>a[low]) {  //t是不是存在于顺序数组
+			
+			if(a[low]<a[mid]){
+				if(t>=a[low] && t<a[mid]){
 					high = mid -1;
 				}else{
-					low = mid + 1;
+					low =mid + 1;
 				}
-			} else {
-				if(t>a[mid] && t < a[high]) {
-					low = mid + 1;
-				} else {
+			}else{
+				if(t<=a[high] && t >a[mid]){
+					low = mid +1;
+				}else{
 					high = mid -1;
 				}
 			}
 		}
+		
 		return -1;
 	}
 
@@ -40,7 +43,7 @@ public class RotateArrayBinarySearch {
 	 */
 	public static void main(String[] args) {
 		int[] a = { 5, 7, 9, 10, 11, 1, 3, 4 };
-		int index = search(a, a.length, 1);
+		int index = search(a, a.length, 7);
 		System.out.println("index=" + index);
 	}
 
